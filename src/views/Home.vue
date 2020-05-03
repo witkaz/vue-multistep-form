@@ -1,18 +1,23 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="centered">
+    <button class="btn btn-primary" @click="showModal = true">
+      Add new case
+    </button>
+    <BaseModal v-if="showModal" @close="showModal = false"></BaseModal>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
+import BaseModal from "@/components/BaseModal";
 export default {
   name: "Home",
-  components: {
-    HelloWorld
+  components: { BaseModal },
+  data() {
+    return {
+      showModal: false
+    };
   }
 };
 </script>
+
+<style></style>
