@@ -1,0 +1,22 @@
+@import '../variables.scss';
+
+.btn {
+  cursor: pointer;
+  border: 1px solid $primary;
+  border-radius: 1rem;
+  color: $primary;
+  padding: 5px 20px;
+  font-size: 14px;
+}
+
+.btn-primary {
+  background-color: $primary;
+  border-radius: 1rem;
+  padding: 10px 25px;
+  color: $white;
+}
+
+.btn-link {
+  color: $primary;
+  border: none;
+}

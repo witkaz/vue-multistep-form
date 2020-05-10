@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import BaseModal from "@/components/BaseModal";
+import BaseModal from "./BaseModal";
 export default {
   name: "Home",
   components: { BaseModal },

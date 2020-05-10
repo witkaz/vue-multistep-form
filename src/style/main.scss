@@ -1,3 +1,7 @@
+@import './Spacing/spacing.scss';
+@import './Buttons/buttons.scss';
+@import './FormElements/inputs.scss';
+
 body {
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
@@ -7,25 +11,4 @@ body {
   position: fixed;
   top: 50%;
   left: 50%;
-}
-
-.btn {
-  cursor: pointer;
-}
-
-.btn-primary {
-  background-color: #0442cb;
-  border: 1px solid #0442cb;
-  border-radius: 1rem;
-  padding: 10px 1rem;
-  color: #ffffff;
-}
-
-// spacing
-.pr-1 {
-  padding-right: 5px;
-}
-
-.px-2 {
-  padding: 0 10px;
 }
