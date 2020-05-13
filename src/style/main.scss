@@ -12,3 +12,16 @@ body {
   top: 50%;
   left: 50%;
 }
+
+.link {
+  text-decoration: none;
+  color: $text-color;
+  font-size: $font-size-m;
+  &-active {
+    color: $primary;
+    &:hover {
+      color: $primary-hover;
+      border-bottom: 1px solid $primary-hover;
+    }
+  }
+}

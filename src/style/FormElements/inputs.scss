@@ -3,10 +3,10 @@
   margin-top: 2.5rem;
   .label {
     font-size: 12px;
-    color: #3b3a39;
+    color: $text-color;
   }
   .input {
-    border: 1px solid #cecece;
+    border: 1px solid $primay-gray;
     width: 350px;
     border-radius: 4px;
     padding: 10px;
@@ -14,5 +14,28 @@
       border: 1px solid $primary;
       outline: none;
     }
+  }
+}
+
+.input-valid {
+  background-color: $bg-valid-form;
+  border: 1px solid $border-valid-form;
+}
+
+.icon-valid {
+  color: #04a204;
+}
+
+.select-option {
+  width: 63%;
+  .vs--open .vs__dropdown-toggle {
+    outline: none;
+    border: 1px solid $primary;
+  }
+
+  .vs__dropdown-option--highlight {
+    background-color: $vs-state-active-bg;
+    opacity: 0.2;
+    color: #212121;
   }
 }

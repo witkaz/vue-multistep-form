@@ -2,19 +2,14 @@
   <div class="input-wrapper">
     <label class="label">
       <div class="pb-1 pl-1">{{ label }}</div>
-
-      <v-select
-        class="select-option"
-        ref="select"
-        :options="options"
-      ></v-select>
+      <textarea class="input" :placeholder="placeholder"></textarea>
     </label>
   </div>
 </template>
 
 <script>
 export default {
-  name: "BaseSelect",
+  name: "BaseTextArea",
   inheritAttrs: false,
   props: {
     label: {
@@ -29,14 +24,6 @@ export default {
       type: String,
       default: ""
     }
-  },
-  data: function() {
-    return {
-      options: ["Test 1", "Test 2", "Test 3"]
-    };
-  },
-  mounted() {
-    // this.$refs.select.open = true
   }
 };
 </script>

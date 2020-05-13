@@ -12,13 +12,17 @@
 
             <div class="modal-body px-2">
               <div class="modal-sidebar py-2">
-                <ul class="sidebar">
+                <ul class="sidebar-menu">
                   <li class="pt-4 sidebar-link-active">Case</li>
                   <li class="pt-4">Vendor</li>
                   <li class="pt-4">Requestor</li>
                   <li class="pt-4">Transactions</li>
                   <li class="pt-4">Attachments</li>
                 </ul>
+                <div class="form-complete-progress">
+                  <div class="form-complete-progress-percent">0%</div>
+                  <div class="form-complete-progress-bar mt-1"></div>
+                </div>
               </div>
               <div class="modal-main-content p-2">
                 <BaseInput
@@ -26,7 +30,8 @@
                   @keydown.enter="search"
                   placeholder="Your Name"
                   label="Name"
-                ></BaseInput>
+                >
+                </BaseInput>
 
                 <BaseInput
                   v-model="lastName"
@@ -42,11 +47,21 @@
                   label="Last Name"
                 ></BaseInput>
 
-                <BaseSelect></BaseSelect>
+                <BaseSelect label="Case Type" placeholder="Select">
+                </BaseSelect>
+
+                <BaseTextArea
+                  label="Description"
+                  placeholder="What the task is about?"
+                ></BaseTextArea>
 
                 <div class="modal-footer p-3">
                   <button class="btn btn-link">Reset to default form</button>
-                  <button class="btn btn-link" style="margin-left: auto">
+                  <button
+                    class="btn btn-link"
+                    style="margin-left: auto"
+                    @click="$emit('close')"
+                  >
                     Cancel
                   </button>
                   <button class="btn">Next</button>
@@ -63,12 +78,14 @@
 <script>
 import BaseInput from "@/components/BaseInput";
 import BaseSelect from "@/components/BaseSelect";
+import BaseTextArea from "@/components/BaseTextArea";
 
 export default {
-  name: "BaseModal",
+  name: "ModalForm",
   components: {
     BaseInput,
-    BaseSelect
+    BaseSelect,
+    BaseTextArea
   }
 };
 </script>
@@ -92,8 +109,10 @@ export default {
   position: fixed;
   left: 0;
   right: 0;
+  top: 0;
+
   margin: 0px auto;
-  top: 10vh;
+  overflow-y: auto;
 }
 
 .modal-container {
@@ -120,7 +139,7 @@ export default {
     justify-content: center;
     display: flex;
 
-    .sidebar {
+    .sidebar-menu {
       list-style: none;
       color: $sidebar-link;
       font-weight: $bold;
@@ -138,9 +157,22 @@ export default {
           background-color: $primary;
           display: inline-block;
           position: relative;
-          left: 37px;
+          left: 46px;
           top: 6px;
         }
+      }
+    }
+    .form-complete-progress {
+      align-self: flex-end;
+      color: $text-color;
+      font-size: $font-size-s;
+      margin-bottom: 1.5rem;
+      &-bar {
+        border: 1px solid $primay-gray;
+        width: 120px;
+        background-color: $primay-gray;
+        position: absolute;
+        left: 25px;
       }
     }
   }

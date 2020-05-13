@@ -11,6 +11,10 @@
         v-on="$listeners"
       />
     </label>
+    <font-awesome-icon
+      class="pl-2 icon-valid"
+      :icon="['fas', 'check-circle']"
+    />
   </div>
 </template>
 

@@ -7,6 +7,11 @@
   color: $primary;
   padding: 5px 20px;
   font-size: 14px;
+  transition: 0.5s;
+  &:hover {
+    color: $white;
+    background-color: $primary;
+  }
 }
 
 .btn-primary {
@@ -14,9 +19,16 @@
   border-radius: 1rem;
   padding: 10px 25px;
   color: $white;
+  &:hover {
+    background-color: $primary-hover;
+  }
 }
 
 .btn-link {
   color: $primary;
   border: none;
+  &:hover {
+    color: $primary-hover;
+    background-color: transparent;
+  }
 }
