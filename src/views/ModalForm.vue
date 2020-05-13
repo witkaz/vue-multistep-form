@@ -13,8 +13,14 @@
             <div class="modal-body px-2">
               <div class="modal-sidebar py-2">
                 <ul class="sidebar-menu">
-                  <li class="pt-4 sidebar-link-active">Case</li>
-                  <li class="pt-4">Vendor</li>
+                  <li class="pt-4">
+                    Case
+                    <font-awesome-icon
+                      class="icon-valid"
+                      :icon="['fas', 'check']"
+                    />
+                  </li>
+                  <li class="pt-4 sidebar-link-active">Vendor</li>
                   <li class="pt-4">Requestor</li>
                   <li class="pt-4">Transactions</li>
                   <li class="pt-4">Attachments</li>
@@ -25,30 +31,22 @@
                 </div>
               </div>
               <div class="modal-main-content p-2">
+                <BaseSelect label="Case Type" placeholder="Select">
+                </BaseSelect>
+
                 <BaseInput
                   v-model="name"
                   @keydown.enter="search"
-                  placeholder="Your Name"
-                  label="Name"
+                  label="Follow up date"
                 >
                 </BaseInput>
 
-                <BaseInput
-                  v-model="lastName"
-                  @keydown.enter="search"
-                  placeholder="Your Last Name"
-                  label="Last Name"
-                ></BaseInput>
+                <BaseSelect
+                  label="Assigned to"
+                  :btnSwitcher="true"
+                ></BaseSelect>
 
-                <BaseInput
-                  v-model="lastName"
-                  @keydown.enter="search"
-                  placeholder="Your Last Name"
-                  label="Last Name"
-                ></BaseInput>
-
-                <BaseSelect label="Case Type" placeholder="Select">
-                </BaseSelect>
+                <BaseSelect label="Status"> </BaseSelect>
 
                 <BaseTextArea
                   label="Description"
@@ -56,7 +54,9 @@
                 ></BaseTextArea>
 
                 <div class="modal-footer p-3">
-                  <button class="btn btn-link">Reset to default form</button>
+                  <button class="btn btn-link" style="margin-left: 1.25rem">
+                    Reset to default form
+                  </button>
                   <button
                     class="btn btn-link"
                     style="margin-left: auto"
@@ -106,12 +106,10 @@ export default {
 .modal-wrapper {
   width: 850px;
   height: 700px;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-
-  margin: 0px auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   overflow-y: auto;
 }
 
@@ -168,9 +166,9 @@ export default {
       font-size: $font-size-s;
       margin-bottom: 1.5rem;
       &-bar {
-        border: 1px solid $primay-gray;
+        border: 1px solid $primary-gray;
         width: 120px;
-        background-color: $primay-gray;
+        background-color: $primary-gray;
         position: absolute;
         left: 25px;
       }

@@ -2,19 +2,28 @@
   <div class="input-wrapper">
     <label class="label">
       <div class="pb-1 pl-1">{{ label }}</div>
-
+      <BaseBtnSwitcher
+        class="mb-2"
+        v-if="btnSwitcher === true"
+      ></BaseBtnSwitcher>
       <v-select
         class="select-option"
         ref="select"
         :options="options"
+        placeholder="Select"
       ></v-select>
     </label>
   </div>
 </template>
 
 <script>
+import BaseBtnSwitcher from "@/components/BaseBtnSwitcher";
+
 export default {
   name: "BaseSelect",
+  components: {
+    BaseBtnSwitcher
+  },
   inheritAttrs: false,
   props: {
     label: {
@@ -28,6 +37,10 @@ export default {
     placeholder: {
       type: String,
       default: ""
+    },
+    btnSwitcher: {
+      type: Boolean,
+      default: false
     }
   },
   data: function() {

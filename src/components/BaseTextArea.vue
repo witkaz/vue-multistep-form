@@ -2,7 +2,12 @@
   <div class="input-wrapper">
     <label class="label">
       <div class="pb-1 pl-1">{{ label }}</div>
-      <textarea class="input" :placeholder="placeholder"></textarea>
+      <textarea
+        class="input"
+        :placeholder="placeholder"
+        rows="5"
+        cols="100"
+      ></textarea>
     </label>
   </div>
 </template>
