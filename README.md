@@ -1,5 +1,7 @@
 # multistep-form
 
+Wizard Multistep Form built with Vue, Vuelidate, v-select and axios.
+
 ## Project setup
 ```
 yarn install
