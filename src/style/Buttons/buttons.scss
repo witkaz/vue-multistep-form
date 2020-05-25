@@ -12,6 +12,10 @@
     color: $white;
     background-color: $primary;
   }
+  &:focus {
+    box-shadow: 0 0 2pt 1pt $primary;
+    outline: none;
+  }
 }
 
 .btn-primary {

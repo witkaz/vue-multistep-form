@@ -1,6 +1,7 @@
 @import './Spacing/spacing.scss';
 @import './Buttons/buttons.scss';
 @import './FormElements/inputs.scss';
+@import './Layout/layout.scss';
 
 body {
   box-sizing: border-box;
@@ -24,4 +25,9 @@ body {
       border-bottom: 1px solid $primary-hover;
     }
   }
+}
+
+.error-message {
+  color: $validation-error;
+  font-size: $font-size-s;
 }

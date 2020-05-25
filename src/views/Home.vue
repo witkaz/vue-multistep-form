@@ -4,7 +4,10 @@
       <button class="btn btn-primary" @click="showModal = true">
         Add new case
       </button>
-      <ModalForm v-if="showModal" @close="showModal = false"></ModalForm>
+      <ModalWizardForm
+        v-if="showModal"
+        @close="showModal = false"
+      ></ModalWizardForm>
     </div>
     <a class="link" href="https://www.behance.net/chejniakpiotr">
       designed by
@@ -14,10 +17,10 @@
 </template>
 
 <script>
-import ModalForm from "./ModalForm";
+import ModalWizardForm from "./ModalWizardForm";
 export default {
   name: "Home",
-  components: { ModalForm },
+  components: { ModalWizardForm },
   data() {
     return {
       showModal: false
@@ -25,5 +28,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

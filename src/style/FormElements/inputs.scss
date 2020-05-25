@@ -4,26 +4,58 @@
   .label {
     font-size: 12px;
     color: $text-color;
+    display: block;
   }
   .input {
     border: 1px solid $primary-gray;
     width: 350px;
+    color: $input-text;
+    font-size: $font-size-s;
     border-radius: 4px;
     padding: 10px;
+    &-md {
+      width: 220px;
+    }
+    &-sm {
+      width: 180px;
+    }
+    &-xs {
+      width: 120px;
+    }
+    &-disabled {
+      background-color: $input-disabled;
+      border: 1px solid $primary-gray;
+    }
     &:focus {
       border: 1px solid $primary;
       outline: none;
     }
   }
-}
+  .input-valid {
+    background-color: $bg-valid-form;
+    border: 1px solid $border-valid-form;
+    &:focus {
+      border: 1px solid $border-valid-form;
+      outline: $border-valid-form;
+    }
+  }
 
-.input-valid {
-  background-color: $bg-valid-form;
-  border: 1px solid $border-valid-form;
+  .input-invalid {
+    background-color: $bg-invalid-form;
+    border: 1px solid $validation-error;
+    &:focus {
+      border: 1px solid $validation-error;
+      outline: $validation-error;
+    }
+  }
 }
 
 .icon-valid {
   color: #04a204;
+}
+
+.icon-invalid {
+  color: $validation-error;
 }
 
 .select-option {
@@ -38,4 +70,24 @@
     opacity: 0.2;
     color: #212121;
   }
+
+  input.vs__search {
+    color: $input-text;
+    font-weight: 500;
+    opacity: 0.5;
+    font-size: $font-size-s;
+  }
+
+  input.vs__no-options {
+    font-size: $font-size-s;
+  }
+}
+
+.validation {
+  margin-left: 3.5rem;
+}
+
+.error {
+  color: $validation-error;
+  font-size: $font-size-m;
 }

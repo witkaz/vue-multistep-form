@@ -4,19 +4,15 @@
       <div class="modal-mask">
         <div class="modal-wrapper">
           <div class="modal-container">
-            <div class="modal-header px-2">
-              <font-awesome-icon class="pr-2" :icon="['fas', 'pen']" />
-              <slot name="header">New case</slot>
-              <div class="close" @click="$emit('close')"></div>
-            </div>
-
+            <ModalHeader></ModalHeader>
             <div class="modal-body px-2">
               <div class="modal-sidebar py-2">
                 <ul class="sidebar-menu">
                   <li class="pt-4">
                     Case
                     <font-awesome-icon
-                      class="icon-valid"
+                      style="position: absolute"
+                      class="icon-valid pl-2"
                       :icon="['fas', 'check']"
                     />
                   </li>
@@ -31,28 +27,13 @@
                 </div>
               </div>
               <div class="modal-main-content p-2">
-                <BaseSelect label="Case Type" placeholder="Select">
-                </BaseSelect>
-
-                <BaseInput
-                  v-model="name"
-                  @keydown.enter="search"
-                  label="Follow up date"
-                >
-                </BaseInput>
-
-                <BaseSelect
-                  label="Assigned to"
-                  :btnSwitcher="true"
-                ></BaseSelect>
-
-                <BaseSelect label="Status"> </BaseSelect>
-
-                <BaseTextArea
-                  label="Description"
-                  placeholder="What the task is about?"
-                ></BaseTextArea>
-
+                <keep-alive>
+                  <component
+                    ref="currentStep"
+                    :is="currentFormStep"
+                    @update="processStep"
+                  ></component>
+                </keep-alive>
                 <div class="modal-footer p-3">
                   <button class="btn btn-link" style="margin-left: 1.25rem">
                     Reset to default form
@@ -64,7 +45,14 @@
                   >
                     Cancel
                   </button>
-                  <button class="btn">Next</button>
+                  <button
+                    @click="goBack"
+                    v-if="currentStepNumber > 1"
+                    class="btn mr-1"
+                  >
+                    Back
+                  </button>
+                  <button class="btn" @click="goNext">Next</button>
                 </div>
               </div>
             </div>
@@ -76,16 +64,58 @@
 </template>
 
 <script>
-import BaseInput from "@/components/BaseInput";
-import BaseSelect from "@/components/BaseSelect";
-import BaseTextArea from "@/components/BaseTextArea";
+import ModalHeader from "@/components/modal-elements/ModalHeader";
+import FormCase from "@/components/FormCase";
+import FormVendor from "@/components/FormVendor";
+import FormRequestor from "@/components/FormRequestor";
+import FormTransactions from "@/components/FormTransactions";
+import FormAttachments from "@/components/FormAttachments";
 
 export default {
-  name: "ModalForm",
+  name: "ModalWizardForm",
   components: {
-    BaseInput,
-    BaseSelect,
-    BaseTextArea
+    ModalHeader,
+    FormCase,
+    FormVendor,
+    FormRequestor,
+    FormTransactions,
+    FormAttachments
+  },
+  data() {
+    return {
+      canGoNext: false,
+      currentStepNumber: 1,
+      asyncState: null,
+      steps: [
+        "FormCase",
+        "FormVendor",
+        "FormRequestor",
+        "FormTransactions",
+        "FormAttachments"
+      ]
+    };
+  },
+  computed: {
+    currentFormStep() {
+      return this.steps[this.currentStepNumber - 1];
+    }
+  },
+  methods: {
+    processStep(step) {
+      Object.assign(this.form, step.data);
+      this.canGoNext = step.valid;
+    },
+    goBack() {
+      this.currentStepNumber--;
+    },
+    goNext() {
+      this.currentStepNumber++;
+
+      // nextTick accepts a callback to be executed after the next DOM update cycle
+      // this.$nextTick(() => {
+      //   this.canGoNext = !this.$refs.currentStep.$v.$invalid
+      // })
+    }
   }
 };
 </script>
@@ -105,7 +135,7 @@ export default {
 
 .modal-wrapper {
   width: 850px;
-  height: 700px;
+  height: 710px;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -118,14 +148,6 @@ export default {
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
-}
-
-.modal-header {
-  background-color: #1d1d1d;
-  height: 50px;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
 }
 
 .modal-body {
@@ -178,34 +200,6 @@ export default {
 
 .modal-footer {
   display: flex;
-}
-
-.close {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  right: 0;
-  align-self: flex-end;
-
-  cursor: pointer;
-
-  &::before,
-  &::after {
-    position: absolute;
-    content: "";
-    width: 20px;
-    height: 2px;
-    background: #fff;
-    display: block;
-  }
-
-  &::before {
-    transform: rotate(45deg);
-  }
-
-  &::after {
-    transform: rotate(-45deg);
-  }
 }
 
 .modal-enter {

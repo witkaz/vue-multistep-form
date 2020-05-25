@@ -9,11 +9,16 @@
         :value="value"
         @input="$emit('update', $event.target.value)"
         v-on="$listeners"
+        :class="{ 'input-invalid': test.$error }"
       />
     </label>
     <font-awesome-icon
       class="pl-2 icon-valid"
       :icon="['fas', 'check-circle']"
+    />
+    <font-awesome-icon
+      class="pl-2 icon-invalid"
+      :icon="['fas', 'exclamation-circle']"
     />
   </div>
 </template>
@@ -54,7 +59,8 @@ export default {
         }
         return isValid;
       }
-    }
+    },
+    test: String
   },
   model: {
     prop: "value",
