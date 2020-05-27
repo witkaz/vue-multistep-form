@@ -13,7 +13,7 @@
     background-color: $primary;
   }
   &:focus {
-    box-shadow: 0 0 2pt 1pt $primary;
+    box-shadow: 0 0 10px 2px $primary;
     outline: none;
   }
 }
@@ -37,13 +37,26 @@
   }
 }
 
+.btn-secondary {
+  color: $white;
+  background-color: $secondary;
+  border: 1px solid $secondary;
+  &:hover {
+    color: $secondary;
+    background-color: $white;
+  }
+  &:focus {
+    box-shadow: 0 0 10px 2px $secondary;
+    outline: none;
+  }
+}
+
 .btn-switcher {
   background-color: $primary-gray;
   padding: 2px 0;
   border-radius: 50px;
   color: $text-color-gray;
   cursor: pointer;
-  transition: 5s;
   &:focus {
     outline: none;
     border: none;
@@ -51,7 +64,7 @@
 }
 
 .btnSwitcherActive {
-  background-color: #191e2b;
+  background-color: $secondary;
   color: $white;
   padding: 2px 20px;
   border-radius: 50px;

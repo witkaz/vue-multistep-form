@@ -1,5 +1,8 @@
-.input-wrapper {
+.form-group {
   margin-left: 3.5rem;
+}
+
+.input-wrapper {
   margin-top: 2.5rem;
   .label {
     font-size: 12px;
@@ -9,7 +12,7 @@
   .input {
     border: 1px solid $primary-gray;
     width: 350px;
-    color: $input-text;
+    color: $secondary;
     font-size: $font-size-s;
     border-radius: 4px;
     padding: 10px;
@@ -20,7 +23,7 @@
       width: 180px;
     }
     &-xs {
-      width: 120px;
+      width: 110px;
     }
     &-disabled {
       background-color: $input-disabled;
@@ -72,7 +75,7 @@
   }
 
   input.vs__search {
-    color: $input-text;
+    color: $secondary;
     font-weight: 500;
     opacity: 0.5;
     font-size: $font-size-s;

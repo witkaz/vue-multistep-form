@@ -52,7 +52,9 @@
                   >
                     Back
                   </button>
-                  <button class="btn" @click="goNext">Next</button>
+                  <button @click="nextButtonAction" class="btn">
+                    {{ isLastStep ? "Save" : "Next" }}
+                  </button>
                 </div>
               </div>
             </div>
@@ -96,8 +98,20 @@ export default {
     };
   },
   computed: {
+    length() {
+      return this.steps.length;
+    },
+    progress() {
+      return (this.currentStepNumber / this.length) * 100;
+    },
     currentFormStep() {
       return this.steps[this.currentStepNumber - 1];
+    },
+    isLastStep() {
+      return this.currentStepNumber === this.length;
+    },
+    wizardInProgress() {
+      return this.currentStepNumber <= this.length;
     }
   },
   methods: {
@@ -107,14 +121,27 @@ export default {
     },
     goBack() {
       this.currentStepNumber--;
+      this.canGoNext = true;
     },
     goNext() {
       this.currentStepNumber++;
 
+      // this.canGoNext = false
       // nextTick accepts a callback to be executed after the next DOM update cycle
-      // this.$nextTick(() => {
-      //   this.canGoNext = !this.$refs.currentStep.$v.$invalid
-      // })
+      this.$nextTick(() => {
+        this.canGoNext = !this.$refs.currentStep.$v.$invalid;
+      });
+    },
+    submitOrder() {
+      console.log("form has been sent!");
+    },
+    nextButtonAction() {
+      if (this.isLastStep) {
+        this.submitOrder();
+      } else {
+        this.goNext();
+        console.log("next form");
+      }
     }
   }
 };
@@ -134,8 +161,8 @@ export default {
 }
 
 .modal-wrapper {
-  width: 850px;
-  height: 710px;
+  width: 855px;
+  height: 720px;
   position: absolute;
   left: 50%;
   top: 50%;

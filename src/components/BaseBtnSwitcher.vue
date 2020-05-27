@@ -1,10 +1,11 @@
 <template>
   <div>
     <button @click="toggle = !toggle" class="btn-switcher">
-      <span :class="{ btnSwitcherActive: !toggle }" class="px-4">Person</span
+      <span :class="{ btnSwitcherActive: !toggle }" class="px-4"
+        ><slot name="first-option"></slot></span
       ><span :class="{ btnSwitcherActive: toggle }" class="px-4"
-        >Business Unit</span
-      >
+        ><slot name="second-option"></slot
+      ></span>
     </button>
   </div>
 </template>
