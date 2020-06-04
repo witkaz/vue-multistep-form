@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="form-group">
+    <form @input="submit" class="form-group">
       <div class="input-wrapper">
         <label class="label pb-1 pl-1">Name</label>
         <v-select
@@ -16,10 +16,10 @@
           class="input"
           type="text"
           placeholder="example@email.com"
-          v-model="$v.form.email.$model"
+          v-model="$v.formVendor.email.$model"
           :class="{
-            'input-invalid': $v.form.email.$error,
-            'input-valid': !$v.form.email.$invalid
+            'input-invalid': $v.formVendor.email.$error,
+            'input-valid': !$v.formVendor.email.$invalid
           }"
         />
 
@@ -28,23 +28,23 @@
         {{ $v.form.email.$dirty }} | Error: {{ $v.form.email.$error }}
       </p> -->
         <font-awesome-icon
-          v-if="!$v.form.email.$invalid"
+          v-if="!$v.formVendor.email.$invalid"
           class="pl-2 icon-valid"
           :icon="['fas', 'check-circle']"
         />
         <font-awesome-icon
-          v-if="$v.form.email.$error"
+          v-if="$v.formVendor.email.$error"
           class="pl-2 icon-invalid"
           :icon="['fas', 'exclamation-circle']"
         />
         <div
-          v-if="$v.form.email.$error && !$v.form.email.required"
+          v-if="$v.formVendor.email.$error && !$v.formVendor.email.required"
           class="error-message pt-1"
         >
           Email is required
         </div>
         <div
-          v-if="$v.form.email.$error && !$v.form.email.email"
+          v-if="$v.formVendor.email.$error && !$v.formVendor.email.email"
           class="error-message pt-1"
         >
           Check if provided e-mail is correct
@@ -83,7 +83,7 @@
           />
         </div>
       </div>
-    </div>
+    </form>
   </div>
 </template>
 
@@ -94,17 +94,29 @@ export default {
   name: "FormVendor",
   data: function() {
     return {
-      form: {
+      formVendor: {
         email: null
       }
     };
   },
   validations: {
-    form: {
+    formVendor: {
       email: {
         required,
         email
       }
+    }
+  },
+  methods: {
+    submit() {
+      this.$emit("update", {
+        data: {
+          formVendor: {
+            email: this.formVendor.email
+          }
+        },
+        valid: !this.$v.$invalid
+      });
     }
   }
 };

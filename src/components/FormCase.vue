@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="form-group">
+    <form @input="submit" class="form-group">
       <div class="input-wrapper">
         <label class="label pb-1 pl-1">Case Type</label>
         <v-select
@@ -15,19 +15,19 @@
         <input
           class="input input-md"
           type="text"
-          v-model="$v.form.followUp.$model"
+          v-model="formCase.followUpDate"
           :class="{
-            'input-invalid': $v.form.followUp.$error,
-            'input-valid': !$v.form.followUp.$invalid
+            'input-invalid': $v.formCase.followUpDate.$error,
+            'input-valid': !$v.formCase.followUpDate.$invalid
           }"
         />
         <font-awesome-icon
-          v-if="!$v.form.followUp.$invalid"
+          v-if="!$v.formCase.followUpDate.$invalid"
           class="pl-2 icon-valid"
           :icon="['fas', 'check-circle']"
         />
         <font-awesome-icon
-          v-if="$v.form.followUp.$error"
+          v-if="$v.formCase.followUpDate.$error"
           class="pl-2 icon-invalid"
           :icon="['fas', 'exclamation-circle']"
         />
@@ -58,13 +58,14 @@
       <div class="input-wrapper">
         <label class="label pb-1 pl-1">Description</label>
         <textarea
+          v-model="formCase.description"
           class="input"
           rows="5"
           cols="100"
           placeholder="What the task is about?"
         ></textarea>
       </div>
-    </div>
+    </form>
   </div>
 </template>
 
@@ -77,19 +78,40 @@ export default {
   components: {
     BaseBtnSwitcher
   },
+  props: {
+    multiStepFormData: {
+      type: Object,
+      required: true
+    }
+  },
   data: function() {
     return {
-      form: {
-        followUp: null
+      formCase: {
+        followUpDate: null,
+        description: null
       },
+
       selectOptions: ["Test 1", "Test 2", "Test 3"]
     };
   },
   validations: {
-    form: {
-      followUp: {
+    formCase: {
+      followUpDate: {
         required
       }
+    }
+  },
+  methods: {
+    submit() {
+      this.$emit("update", {
+        data: {
+          formCase: {
+            followUpDate: this.formCase.followUpDate,
+            description: this.formCase.description
+          }
+        },
+        valid: !this.$v.$invalid
+      });
     }
   }
 };

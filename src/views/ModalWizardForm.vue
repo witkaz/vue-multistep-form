@@ -32,6 +32,7 @@
                     ref="currentStep"
                     :is="currentFormStep"
                     @update="processStep"
+                    :multiStepFormData="dataForm"
                   ></component>
                 </keep-alive>
                 <div class="modal-footer p-3">
@@ -94,7 +95,16 @@ export default {
         "FormRequestor",
         "FormTransactions",
         "FormAttachments"
-      ]
+      ],
+      dataForm: {
+        formCase: {
+          followUpDate: null,
+          description: null
+        },
+        formVendor: {
+          email: null
+        }
+      }
     };
   },
   computed: {
@@ -116,7 +126,7 @@ export default {
   },
   methods: {
     processStep(step) {
-      Object.assign(this.form, step.data);
+      Object.assign(this.dataForm, step.data);
       this.canGoNext = step.valid;
     },
     goBack() {
@@ -133,7 +143,7 @@ export default {
       });
     },
     submitOrder() {
-      console.log("form has been sent!");
+      console.log(this.dataForm, "form has been sent!");
     },
     nextButtonAction() {
       if (this.isLastStep) {
