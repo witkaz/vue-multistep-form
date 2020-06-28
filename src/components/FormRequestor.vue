@@ -48,8 +48,10 @@
         >
           Check if provided e-mail is correct
         </div>
-        <div class="d-flex">
-          <p style="font-size: 12px" class="mt-2 mr-3">Email notification</p>
+        <div class="d-flex mt-2">
+          <p style="font-size: 12px; margin-top: 4px" class="mr-3">
+            Email notification
+          </p>
           <BaseBtnSwitcher>
             <template v-slot:first-option>Yes</template>
             <template v-slot:second-option>No</template>
@@ -102,9 +104,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.btn-switcher {
-  margin-top: 10px;
-}
-</style>

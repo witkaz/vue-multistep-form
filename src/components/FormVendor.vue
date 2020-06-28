@@ -3,11 +3,24 @@
     <form @input="submit" class="form-group">
       <div class="input-wrapper">
         <label class="label pb-1 pl-1">Name</label>
-        <v-select
-          class="select-option"
-          ref="select"
-          placeholder="Select"
-        ></v-select>
+        <div class="d-flex align-items-center">
+          <v-select
+            class="select-option"
+            ref="select"
+            placeholder="Select"
+            v-model="formVendor.selectedName"
+            :options="selectName"
+            :class="{
+              'input-invalid': $v.formVendor.selectedName.$error,
+              'input-valid': !$v.formVendor.selectedName.$invalid
+            }"
+          ></v-select>
+          <font-awesome-icon
+            v-if="!$v.formVendor.selectedName.$invalid"
+            class="pl-2 icon-valid"
+            :icon="['fas', 'check-circle']"
+          />
+        </div>
       </div>
 
       <div class="input-wrapper">
@@ -95,8 +108,10 @@ export default {
   data: function() {
     return {
       formVendor: {
-        email: null
-      }
+        email: null,
+        selectedName: null
+      },
+      selectName: ["Name 1", "Name 2", "Name 3"]
     };
   },
   validations: {
@@ -104,6 +119,9 @@ export default {
       email: {
         required,
         email
+      },
+      selectedName: {
+        required
       }
     }
   },
@@ -112,7 +130,8 @@ export default {
       this.$emit("update", {
         data: {
           formVendor: {
-            email: this.formVendor.email
+            email: this.formVendor.email,
+            selectedName: this.formVendor.selectedName
           }
         },
         valid: !this.$v.$invalid

@@ -37,6 +37,7 @@
   .input-valid {
     background-color: $bg-valid-form;
     border: 1px solid $border-valid-form;
+    border-radius: 6px;
     &:focus {
       border: 1px solid $border-valid-form;
       outline: $border-valid-form;
@@ -63,6 +64,15 @@
 
 .select-option {
   width: 63%;
+
+  .vs__dropdown-menu {
+    font-size: $font-size-s;
+  }
+
+  span.vs__selected {
+    font-size: $font-size-s;
+  }
+
   .vs--open .vs__dropdown-toggle {
     outline: none;
     border: 1px solid $primary;

@@ -102,7 +102,8 @@ export default {
           description: null
         },
         formVendor: {
-          email: null
+          email: null,
+          selectedName: null
         }
       }
     };
